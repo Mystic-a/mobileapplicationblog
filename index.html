@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Development Case Studies | Real-World Applications</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #fafbfc;
+    color: #1a202c;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+    color: white;
+    padding: 80px 20px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.5;
+}
+
+header h1 {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    position: relative;
+    letter-spacing: -0.5px;
+}
+
+header .subtitle {
+    font-size: 1.2em;
+    font-weight: 400;
+    opacity: 0.95;
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.author-info {
+    margin-top: 25px;
+    font-size: 0.95em;
+    opacity: 0.9;
+    position: relative;
+}
+
+nav {
+    background: white;
+    padding: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+nav .nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #4a5568;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: 500;
+    font-size: 0.95em;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+nav a:hover {
+    background: #f7fafc;
+    color: #10b981;
+    border-color: #10b981;
+    transform: translateY(-2px);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.section {
+    background: white;
+    padding: 45px;
+    margin-bottom: 50px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid #10b981;
+}
+
+.section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.case-number {
+    background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+    color: white;
+    font-size: 1.8em;
+    font-weight: 700;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.section h2 {
+    color: #2d3748;
+    font-size: 1.9em;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.section img {
+    width: 100%;
+    border-radius: 12px;
+    margin: 25px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.solution-overview {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    padding: 30px;
+    border-radius: 12px;
+    margin: 25px 0;
+    border-left: 4px solid #10b981;
+}
+
+.solution-overview h3 {
+    color: #334155;
+    font-size: 1.15em;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.solution-overview p {
+    color: #475569;
+    margin: 0;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.tech-implementation {
+    background: linear-gradient(135deg, #f0f9ff 0%, #f8fafc 100%);
+    padding: 30px;
+    border-radius: 12px;
+    margin: 30px 0;
+    border: 2px solid #e0e7ff;
+}
+
+.tech-implementation h3 {
+    color: #4338ca;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tech-item {
+    background: white;
+    padding: 18px;
+    margin: 12px 0;
+    border-radius: 10px;
+    border-left: 3px solid #10b981;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.tech-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.tech-item-title {
+    font-weight: 600;
+    color: #4338ca;
+    font-size: 1.05em;
+    margin-bottom: 8px;
+    font-family: 'Fira Code', monospace;
+}
+
+.tech-item-desc {
+    color: #64748b;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.detail-card {
+    background: #fafbfc;
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.detail-card:hover {
+    border-color: #10b981;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.1);
+}
+
+.detail-card h3 {
+    color: #2d3748;
+    font-size: 1.2em;
+    margin-bottom: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-card ul {
+    list-style: none;
+}
+
+.detail-card li {
+    padding: 10px 0;
+    color: #4a5568;
+    border-bottom: 1px solid #e2e8f0;
+    display: block;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.detail-card li:last-child {
+    border-bottom: none;
+}
+
+.detail-card li::before {
+    content: '▸ ';
+    color: #10b981;
+    font-weight: bold;
+}
+
+.detail-card .component-name {
+    font-weight: 500;
+    color: #2d3748;
+    display: inline;
+}
+
+.detail-card .component-use {
+    color: #718096;
+    font-size: 0.9em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    display: inline;
+}
+
+.key-takeaways {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    padding: 25px;
+    border-radius: 12px;
+    margin: 30px 0;
+    border-left: 4px solid #10b981;
+}
+
+.key-takeaways h3 {
+    color: #065f46;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.key-takeaways ul {
+    list-style: none;
+    margin: 0;
+}
+
+.key-takeaways li {
+    padding: 8px 0 8px 25px;
+    color: #047857;
+    position: relative;
+}
+
+.key-takeaways li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #10b981;
+    font-weight: bold;
+}
+
+.references {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    border: 1px solid #e2e8f0;
+}
+
+.references h4 {
+    color: #475569;
+    font-size: 1em;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.references a {
+    color: #10b981;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px 15px 5px 0;
+    padding: 6px 12px;
+    background: white;
+    border-radius: 6px;
+    font-size: 0.9em;
+    border: 1px solid #e0e7ff;
+    transition: all 0.3s ease;
+}
+
+.references a:hover {
+    background: #10b981;
+    color: white;
+    transform: translateY(-2px);
+}
+
+footer {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 60px;
+}
+
+footer p {
+    margin: 10px 0;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .section {
+        padding: 25px;
+    }
+    
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Mobile Development Case Studies</h1>
+    <p class="subtitle">Exploring Real-World Mobile Applications and Their Technical Architecture</p>
+    <div class="author-info">A Deep Dive into Modern Mobile APIs, Architectures & Best Practices</div>
+</header>
+
+<nav>
+    <div class="nav-content">
+        <a href="#intro">Introduction</a>
+        <a href="#case1">HR Attendance System</a>
+        <a href="#case2">IoT Vehicle Automation</a>
+        <a href="#case3">Workforce Management</a>
+        <a href="#case4">AI Media Editor</a>
+    </div>
+</nav>
+
+<section id="intro" style="background: white; padding: 60px 20px; text-align: center; border-bottom: 1px solid #e2e8f0;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h2 style="color: #2d3748; font-size: 2.2em; margin-bottom: 20px; font-weight: 700;">Hi, I'm Mystica 👋</h2>
+        <p style="color: #4a5568; font-size: 1.15em; line-height: 1.8; margin-bottom: 15px;">
+            Welcome to my blog where I explore the fascinating world of <strong>mobile development through real-world case studies</strong>. This blog dives deep into actual mobile applications, breaking down their technical architecture, API implementations, and engineering decisions.
+        </p>
+        <p style="color: #4a5568; font-size: 1.15em; line-height: 1.8;">
+            Each case study showcases practical mobile development concepts—from Camera APIs and Machine Learning integration to IoT connectivity and hardware-accelerated graphics. Whether you're building your first app or architecting complex systems, these detailed technical breakdowns will give you insights into how modern mobile applications work behind the scenes.
+        </p>
+    </div>
+</section>
+
+<div class="container">
+
+<!-- Case Study 1 -->
+<div class="section" id="case1">
+<div class="section-header">
+    <div class="case-number">01</div>
+    <h2>Smart HR Attendance System with Face Recognition</h2>
+</div>
+
+<img src="1.jpg" alt="Face Recognition Attendance System Interface">
+
+<div class="solution-overview">
+    <h3>📋 Case Overview</h3>
+    <p>This mobile attendance solution transforms how organizations track employee presence by replacing physical biometric terminals with intelligent smartphone-based check-in. The mobile application leverages the device's native Camera API to capture facial images, processes them through on-device machine learning models for identity verification, and uses Location Services (FusedLocationProviderClient) to ensure employees are physically present at designated work locations. The system demonstrates seamless integration of multiple mobile platform APIs: CameraX for consistent camera access across devices, TensorFlow Lite for real-time face detection and recognition (processing locally to protect biometric privacy), and Firebase Firestore for cloud data synchronization. Event-driven architecture handles camera lifecycle through OnClickListener triggers, processes location updates via LocationCallback, and manages Firebase operations with OnSuccessListener/OnFailureListener patterns. The UI employs Material Design components including EditText for employee ID input, MaterialButton with loading states, RecyclerView with DiffUtil for efficient attendance history display, and CardView elements for dashboard summaries. Layout implementation uses ConstraintLayout for the main screen's flat hierarchy, FrameLayout to overlay UI controls on the camera preview, and CoordinatorLayout for smooth scrolling behaviors with collapsing toolbar effects.</p>
+</div>
+
+<div class="tech-implementation">
+    <h3>⚙️ Technical Architecture & Mobile Platform APIs</h3>
+    
+    <div class="tech-item">
+        <div class="tech-item-title">📷 CameraX API - Camera Hardware Access</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> CameraX provides lifecycle-aware camera operations that automatically handle camera opening, closing, and configuration based on Activity/Fragment lifecycle. The ProcessCameraProvider binds camera use cases (Preview + ImageAnalysis) to the lifecycle owner.
+        <br><br><strong>Implementation:</strong> PreviewView displays live camera feed. ImageAnalysis.Analyzer receives camera frames as ImageProxy objects at 30fps, converts YUV_420_888 format to Bitmap, then feeds to ML model. setTargetRotation() ensures correct image orientation across device rotations. The camera initializes asynchronously, avoiding ANR (Application Not Responding) errors on the main thread.</div>
+    </div>
+
+    <div class="tech-item">
+        <div class="tech-item-title">📱 FusedLocationProviderClient - Location Sensor API</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> This Google Play Services API abstracts GPS, Wi-Fi, and cellular location providers into a unified interface. It automatically selects the best location source based on accuracy requirements and battery constraints.
+        <br><br><strong>Implementation:</strong> LocationRequest configured with setPriority(PRIORITY_HIGH_ACCURACY) for GPS precision and setInterval(10000) for updates every 10 seconds. LocationCallback receives Location objects containing latitude, longitude, and accuracy. The app uses Location.distanceTo() to calculate distance from office coordinates, implementing geofence logic that compares computed distance against 100-meter radius threshold before enabling check-in button.</div>
+    </div>
+
+    <div class="tech-item">
+        <div class="tech-item-title">🤖 TensorFlow Lite - On-Device ML API</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> TensorFlow Lite enables on-device machine learning inference without cloud dependency, maintaining privacy and working offline. Models are loaded from assets and run using the Interpreter class with optional GPU acceleration.
+        <br><br><strong>Implementation:</strong> Interpreter loads .tflite models via MappedByteBuffer from assets folder. GpuDelegate passed to Interpreter.Options enables hardware acceleration for 10x faster inference. Input preprocessing converts Bitmap to ByteBuffer/FloatBuffer matching model's input tensor shape. Interpreter.run(inputBuffer, outputBuffer) executes inference. For face recognition, output contains face embeddings compared against enrolled user embeddings using cosine similarity. Confidence threshold of 0.85 prevents false acceptances.</div>
+    </div>
+
+    <div class="tech-item">
+        <div class="tech-item-title">☁️ Firebase Firestore - Cloud Database API</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> Firestore provides real-time NoSQL cloud database with automatic synchronization and offline persistence. Changes propagate instantly to all connected clients via WebSocket connections.
+        <br><br><strong>Implementation:</strong> FirebaseFirestore.getInstance() provides database reference. CollectionReference and DocumentReference navigate data hierarchy. addDocument() creates new records, setDocument() overwrites, updateDocument() modifies fields. addSnapshotListener() enables real-time updates with DocumentSnapshot callbacks. Offline persistence enabled via FirebaseFirestoreSettings allows full CRUD operations without connectivity. Data structure: users/{userId}/attendance/{date} contains timestamp, coordinates, and confidence score fields. Transaction API ensures atomic multi-document updates.</div>
+    </div>
+</div>
+
+<div class="details-grid">
+    <div class="detail-card">
+        <h3>📱 UI Components Used</h3>
+        <ul>
+            <li><span class="component-name">EditText</span> <span class="component-use">– inputType="number" for employee ID, TextInputLayout wrapper shows floating label and error messages via setError()</span></li>
+            <li><span class="component-name">MaterialButton</span> <span class="component-use">– setEnabled(false) during processing, ProgressBar inside shows loading state, OnClickListener triggers check-in workflow</span></li>
+            <li><span class="component-name">TextView</span> <span class="component-use">– Updates via setText() in callback handlers, uses Spannable for colored status messages (green/red)</span></li>
+            <li><span class="component-name">RecyclerView</span> <span class="component-use">– LinearLayoutManager for vertical list, DiffUtil calculates minimal updates, ViewHolder pattern with data binding</span></li>
+            <li><span class="component-name">CardView</span> <span class="component-use">– Material elevation (8dp), rounded corners (cardCornerRadius), contains CheckIn/Out times and location accuracy</span></li>
+            <li><span class="component-name">ProgressBar</span> <span class="component-use">– Indeterminate circular style, visibility toggled VISIBLE/GONE during face recognition processing</span></li>
+        </ul>
+    </div>
+
+    <div class="detail-card">
+        <h3>🎨 Layout Architecture</h3>
+        <ul>
+            <li><span class="component-name">ConstraintLayout</span> <span class="component-use">– Root layout with horizontal/vertical chains for button groups, Guidelines at 50% for centered alignment, barriers for dynamic content</span></li>
+            <li><span class="component-name">FrameLayout</span> <span class="component-use">– Stacks PreviewView (camera) with overlay ImageView (face detection rectangle drawn using Canvas)</span></li>
+            <li><span class="component-name">LinearLayout</span> <span class="component-use">– android:orientation="vertical" with layout_weight for proportional space distribution in login form</span></li>
+            <li><span class="component-name">CoordinatorLayout</span> <span class="component-use">– Enables CollapsingToolbarLayout with scroll flags (scroll|exitUntilCollapsed), FAB uses anchor for positioning</span></li>
+        </ul>
+    </div>
+
+    <div class="detail-card">
+        <h3>⚡ Event Handling</h3>
+        <ul>
+            <li><span class="component-name">View.OnClickListener</span> <span class="component-use">– button.setOnClickListener { } lambda captures button click, checks permissions, initiates camera + location requests</span></li>
+            <li><span class="component-name">LocationCallback</span> <span class="component-use">– onLocationResult(LocationResult) receives location updates, extracts lastLocation, compares coordinates using haversine formula</span></li>
+            <li><span class="component-name">ImageAnalysis.Analyzer</span> <span class="component-use">– analyze(ImageProxy) called per frame, image.planes[0] contains Y channel, converts to Bitmap, runs TFLite inference</span></li>
+            <li><span class="component-name">OnSuccessListener<T></span> <span class="component-use">– Firebase Task.addOnSuccessListener callback receives DocumentReference, updates UI on main thread via runOnUiThread</span></li>
+            <li><span class="component-name">OnFailureListener</span> <span class="component-use">– addOnFailureListener receives Exception, checks if FirebaseNetworkException for offline handling, shows Snackbar error</span></li>
+        </ul>
+    </div>
+</div>
+
+<div class="key-takeaways">
+    <h3>🔑 Key Technical Insights</h3>
+    <ul>
+        <li>Using CameraX instead of deprecated Camera API reduces code complexity by 60% and eliminates device-specific bugs</li>
+        <li>On-device ML processing with TensorFlow Lite keeps face data private and works in areas with poor connectivity</li>
+        <li>FusedLocationProviderClient's smart location strategy extends battery life by 40% compared to raw GPS</li>
+        <li>Firebase's offline persistence ensures zero data loss even during network outages</li>
+        <li>Background WorkManager syncs pending attendance records automatically when connectivity returns</li>
+    </ul>
+</div>
+
+<div class="references">
+    <h4>📚 Real-World Implementations</h4>
+    <a href="https://www.scribd.com/document/843224271/Customers-Sucess-Stories" target="_blank">Customer Success Stories - Face Recognition Attendance Systems</a>
+</div>
+</div>
+
+<!-- Case Study 2 -->
+<div class="section" id="case2">
+<div class="section-header">
+    <div class="case-number">02</div>
+    <h2>Vehicle Wash IoT Automation System</h2>
+</div>
+
+<img src="2.jpg" alt="Automated Vehicle Wash System">
+
+<div class="solution-overview">
+    <h3>📋 Case Overview</h3>
+    <p>This self-service carwash automation system demonstrates advanced mobile connectivity APIs by creating a mobile control interface for industrial IoT hardware. The application uses Bluetooth Low Energy (BLE) API to establish wireless communication with wash station PLCs, sending GATT characteristic writes to trigger equipment (water jets, soap dispensers, rotating brushes). ML Kit Barcode Scanning API processes vehicle QR codes through Camera API integration, extracting JSON-encoded wash specifications. The app's network layer implements MQTT protocol via Eclipse Paho mobile client for real-time bidirectional communication with cloud servers. UI architecture employs BottomNavigationView for primary navigation between scanner, active sessions, and history screens. The scanner interface uses FrameLayout to overlay scan guidelines on the CameraSourcePreview, while active wash sessions display in RecyclerView with custom ViewHolders showing real-time progress. Event handling includes BluetoothGattCallback for BLE connection state changes and characteristic notifications, BroadcastReceiver monitoring network connectivity via ConnectivityManager, and MqttCallback handling message delivery confirmations. Layout strategy uses ConstraintLayout with Guidelines for responsive positioning across 7-10 inch industrial tablets, and MotionLayout for animated transitions between scanning and wash-in-progress states with interpolated progress bars and status text updates.</p>
+</div>
+
+<div class="tech-implementation">
+    <h3>⚙️ Technical Architecture & Mobile Platform APIs</h3>
+    
+    <div class="tech-item">
+        <div class="tech-item-title">📡 Bluetooth Low Energy (BLE) API - Hardware Communication</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> BLE stack uses BluetoothAdapter.getDefaultAdapter() to access device Bluetooth radio. BluetoothLeScanner performs device discovery with ScanCallback receiving ScanResult objects containing RSSI signal strength and advertised service UUIDs.
+        <br><br><strong>Implementation:</strong> BluetoothGatt.connectGatt() establishes connection to PLC controller. BluetoothGattCallback.onConnectionStateChange() detects STATE_CONNECTED, then discoverServices() enumerates available GATT services. BluetoothGattCharacteristic.setValue(bytes) prepares command payload, writeCharacteristic() transmits to hardware. onCharacteristicWrite() callback confirms transmission success. Characteristic notifications (setCharacteristicNotification) enable real-time status updates from equipment, with onCharacteristicChanged() receiving sensor data like water pressure and soap levels.</div>
+    </div>
+
+    <div class="tech-item">
+        <div class="tech-item-title">📷 ML Kit Barcode Scanning API</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> ML Kit Vision API provides fast on-device barcode/QR code detection without requiring separate model downloads. Supports 1D barcodes, QR codes, Data Matrix, and more with automatic format detection.
+        <br><br><strong>Implementation:</strong> InputImage.fromBitmap() or fromMediaImage() creates image input from camera frames. BarcodeScanner.process(inputImage) asynchronously detects codes, returning Task<List<Barcode>>. Barcode objects contain getRawValue() for decoded string, getBoundingBox() for screen coordinates, and getValueType() identifying format (QR_CODE, EAN_13, etc.). Processing typically completes in 50-100ms. Success handler extracts vehicle specifications from JSON-encoded QR data.</div>
+    </div>
+
+    <div class="tech-item">
+        <div class="tech-item-title">🌐 ConnectivityManager - Network Monitoring API</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> ConnectivityManager system service monitors network state changes, allowing apps to respond to connectivity transitions between Wi-Fi, cellular, and offline states.
+        <br><br><strong>Implementation:</strong> NetworkCallback registered via registerNetworkCallback() receives onAvailable(), onLost(), and onCapabilitiesChanged() events. NetworkCapabilities.hasCapability(NET_CAPABILITY_INTERNET) verifies actual internet connectivity beyond network connection. When offline detected, app queues MQTT publish operations in Room database. NetworkRequest.Builder specifies required capabilities (TRANSPORT_WIFI, TRANSPORT_CELLULAR). On connectivity restore, DataSyncWorker triggered via WorkManager uploads pending transactions.</div>
+    </div>
+
+    <div class="tech-item">
+        <div class="tech-item-title">📨 Eclipse Paho MQTT Client</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> MQTT (Message Queuing Telemetry Transport) is a lightweight publish-subscribe protocol ideal for IoT applications. Eclipse Paho provides mobile-compatible MQTT client implementation.
+        <br><br><strong>Implementation:</strong> MqttAndroidClient initialized with broker URL (tcp://broker.hivemq.com:1883) and unique client ID. MqttConnectOptions configures credentials, keep-alive interval, and clean session flag. connect() establishes connection with MqttCallback providing connectionLost(), messageArrived(), and deliveryComplete() callbacks. publish() sends messages with QoS levels: 0 (at most once), 1 (at least once), 2 (exactly once). subscribe() listens to topics using wildcards: carwash/station1/# receives all subtopics. Retained messages ensure new subscribers receive last known state.</div>
+    </div>
+</div>
+
+<div class="details-grid">
+    <div class="detail-card">
+        <h3>📱 UI Components Used</h3>
+        <ul>
+            <li><span class="component-name">MaterialToolbar</span> <span class="component-use">– inflateMenu(R.menu.main) loads menu items, onMenuItemClick listener handles settings/logout actions, setNavigationIcon shows back button</span></li>
+            <li><span class="component-name">FloatingActionButton</span> <span class="component-use">– app:srcCompat for vector drawable icon, setOnClickListener launches QR scanner, animates with show()/hide() based on scroll</span></li>
+            <li><span class="component-name">TextView</span> <span class="component-use">– Data binding with @{viewModel.bleStatus} updates text automatically, SpannableString for mixed styling (bold device name)</span></li>
+            <li><span class="component-name">Snackbar</span> <span class="component-use">– make(view, message, LENGTH_LONG).setAction("Retry") for dismissible alerts, anchorView positions above FAB</span></li>
+            <li><span class="component-name">BottomNavigationView</span> <span class="component-use">– menu resource defines items, setOnItemSelectedListener switches fragments via FragmentTransaction.replace()</span></li>
+            <li><span class="component-name">Chip</span> <span class="component-use">– Closeable style with closeIcon, ChipGroup holds multiple chips, onCloseIconClick disconnects BLE device</span></li>
+        </ul>
+    </div>
+
+    <div class="detail-card">
+        <h3>🎨 Layout Architecture</h3>
+        <ul>
+            <li><span class="component-name">ConstraintLayout</span> <span class="component-use">– app:layout_constraintTop_toBottomOf chains views vertically, bias (0.3) shifts elements, aspect ratio constraint (16:9) for preview</span></li>
+            <li><span class="component-name">FrameLayout</span> <span class="component-use">– Match_parent dimensions allow fullscreen scanner, child views with layout_gravity="center" overlay scan guidelines</span></li>
+            <li><span class="component-name">MotionLayout</span> <span class="component-use">– MotionScene XML defines transitions with KeyFrameSet, KeyAttribute animates alpha/scale, onTransitionCompleted listener detects state changes</span></li>
+        </ul>
+    </div>
+
+    <div class="detail-card">
+        <h3>⚡ Event Handling</h3>
+        <ul>
+            <li><span class="component-name">BluetoothGattCallback</span> <span class="component-use">– onConnectionStateChange(gatt, status, newState) detects STATE_CONNECTED/DISCONNECTED, onServicesDiscovered enumerates characteristics, onCharacteristicWrite confirms command transmission</span></li>
+            <li><span class="component-name">View.OnClickListener</span> <span class="component-use">– Manual control buttons write specific byte arrays to BLE characteristics: byteArrayOf(0x01) starts pump, 0x00 stops</span></li>
+            <li><span class="component-name">BroadcastReceiver</span> <span class="component-use">– IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION) registered in onResume, onReceive checks NetworkInfo.isConnected()</span></li>
+            <li><span class="component-name">MqttCallback</span> <span class="component-use">– messageArrived(topic, MqttMessage) parses JSON payload, deliveryComplete(IMqttDeliveryToken) confirms QoS 1 message sent</span></li>
+            <li><span class="component-name">BarcodeDetectorProcessor</span> <span class="component-use">– Barcode.getBoundingBox() provides Rect, getRawValue() returns decoded string, Vibrator.vibrate(100) gives haptic feedback</span></li>
+        </ul>
+    </div>
+</div>
+
+<div class="key-takeaways">
+    <h3>🔑 Key Technical Insights</h3>
+    <ul>
+        <li>BLE's GATT protocol allows controlling multiple wash modules simultaneously through different characteristics</li>
+        <li>MQTT's lightweight overhead (2-byte headers) makes it perfect for high-frequency status updates without data bloat</li>
+        <li>Local Room database caching prevents revenue loss when network connectivity drops during transactions</li>
+        <li>ML Kit's automatic QR detection works 3x faster than legacy ZXing library and handles damaged codes better</li>
+        <li>Implementing exponential backoff for BLE reconnections prevents battery drain from aggressive retry loops</li>
+    </ul>
+</div>
+
+<div class="references">
+    <h4>📚 Real-World Implementations</h4>
+    <a href="https://nerds.sh/case-studies/self-service-carwash-automation" target="_blank">Self-Service Carwash Automation - IoT Case Study</a>
+</div>
+</div>
+
+<!-- Case Study 3 -->
+<div class="section" id="case3">
+<div class="section-header">
+    <div class="case-number">03</div>
+    <h2>Field Workforce Management Application</h2>
+</div>
+
+<img src="https://images.unsplash.com/photo-1521791136064-7986c2920216" alt="Field Technician Management System">
+
+<div class="solution-overview">
+    <h3>📋 Case Overview</h3>
+    <p>This field workforce management application showcases mobile offline-first architecture capabilities and background processing APIs for enterprise mobile solutions. The system leverages Room Persistence Library (SQLite abstraction) with @Entity, @Dao, and @Database annotations to store job assignments, customer data, and service history locally, enabling full functionality without network connectivity. Google Maps SDK integrates via SupportMapFragment, displaying technician locations with custom marker icons and polyline route history. Location tracking uses FusedLocationProviderClient with LocationRequest configured for PRIORITY_BALANCED_POWER_ACCURACY, updating every 120 seconds via foreground Service with ongoing notification to comply with platform background location restrictions. Geofencing API registers CircularGeofence objects with 200-meter radius around job sites, triggering PendingIntent broadcasts when technicians enter/exit zones (GEOFENCE_TRANSITION_ENTER/EXIT). WorkManager schedules PeriodicWorkRequest for data synchronization running every 15 minutes under NetworkType.CONNECTED constraint. UI implements NavigationDrawer with DrawerLayout and NavigationView for menu navigation. Main screen uses TabLayout + ViewPager2 with FragmentStateAdapter managing Today/Upcoming/Completed job fragments. RecyclerView displays jobs with ItemTouchHelper enabling swipe gestures—swiping right calls customer via Intent.ACTION_DIAL, left launches navigation via Intent.ACTION_VIEW with geo URI. Event handling includes OnMapReadyCallback for map initialization, OnMarkerClickListener opening job details in BottomSheetDialogFragment, and LiveData observers triggering UI updates when Room database changes.</p>
+</div>
+
+<div class="tech-implementation">
+    <h3>⚙️ Technical Architecture & Mobile Platform APIs</h3>
+    
+    <div class="tech-item">
+        <div class="tech-item-title">🗺️ Google Maps SDK - Location Visualization</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> Maps SDK integrates via SupportMapFragment added to layout XML or programmatically. getMapAsync() callback provides GoogleMap instance after asynchronous initialization, avoiding main thread blocking.
+        <br><br><strong>Implementation:</strong> GoogleMap.addMarker() creates Marker objects with custom BitmapDescriptor icons (colored by technician status). MarkerOptions.position() sets LatLng coordinates. Polyline objects visualize routes with PolylineOptions.addAll(List<LatLng>). OnMarkerClickListener intercepts marker taps, returning false to show default InfoWindow or true for custom handling. CameraUpdateFactory.newLatLngBounds() animates map viewport to fit all markers. MapStyleOptions.loadRawResourceStyle() applies JSON styling customizing road colors, label visibility, and POI display. Local tile caching enables partial offline map viewing of previously loaded areas.</div>
+    </div>
+
+    <div class="tech-item">
+        <div class="tech-item-title">📍 Fused Location Provider + Geofencing API</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> FusedLocationProviderClient intelligently combines GPS, Wi-Fi, and cell tower data for optimal battery-efficient location tracking. Geofencing API provides event-driven location monitoring without continuous polling.
+        <br><br><strong>Implementation:</strong> LocationRequest created with setInterval(120000) for updates every 2 minutes, setPriority(PRIORITY_BALANCED_POWER_ACCURACY) balances accuracy (~100m) with battery life. requestLocationUpdates() with LocationCallback receives onLocationResult() events. CircularGeofence built with latitude, longitude, radius (200 meters), and transition types (GEOFENCE_TRANSITION_ENTER | EXIT). GeofencingClient.addGeofences() registers geofences with PendingIntent triggering BroadcastReceiver when technician enters/exits job sites. This eliminates need for continuous GPS polling, reducing battery consumption by 70%.</div>
+    </div>
+
+    <div class="tech-item">
+        <div class="tech-item-title">💾 Room Persistence Library</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> Room provides type-safe SQLite database abstraction with compile-time query verification and seamless LiveData integration for reactive UI updates. Essential for offline-first mobile applications.
+        <br><br><strong>Implementation:</strong> @Entity annotation defines database tables with primary keys and indexes. @Dao interfaces declare queries: @Query("SELECT * FROM jobs WHERE date = :date"), @Insert, @Update, @Delete methods. @Database abstract class extends RoomDatabase, defines version number and entity list. Room.databaseBuilder() creates database instance. Foreign keys enforce referential integrity. @Embedded flattens nested objects. @TypeConverter handles complex types. LiveData<List<Job>> queries automatically notify observers when data changes. Migration strategies handle schema updates between versions without data loss.</div>
+    </div>
+
+    <div class="tech-item">
+        <div class="tech-item-title">⚙️ WorkManager - Background Task API</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> WorkManager provides guaranteed background task execution with constraint-based scheduling, surviving app process death and device reboots. Compatible across all platform versions using JobScheduler, AlarmManager, or BroadcastReceiver as appropriate.
+        <br><br><strong>Implementation:</strong> PeriodicWorkRequest.Builder(DataSyncWorker::class.java, 15, TimeUnit.MINUTES) creates recurring work. Constraints.Builder().setRequiredNetworkType(CONNECTED).setRequiresBatteryNotLow(true) defines execution requirements. enqueueUniquePeriodicWork() prevents duplicate scheduling. Worker's doWork() runs on background thread, returning Result.success(), Result.retry(), or Result.failure(). OneTimeWorkRequest for immediate execution when critical updates needed. WorkInfo.State observable via WorkManager.getWorkInfoByIdLiveData() for UI progress updates. Worker queries Room for syncStatus="PENDING" records, uploads via Retrofit REST client, updates local database on successful network response.</div>
+    </div>
+</div>
+
+<div class="details-grid">
+    <div class="detail-card">
+        <h3>📱 UI Components Used</h3>
+        <ul>
+            <li><span class="component-name">NavigationView</span> <span class="component-use">– app:headerLayout displays user profile, app:menu inflates navigation items, setNavigationItemSelectedListener handles menu selections</span></li>
+            <li><span class="component-name">RecyclerView</span> <span class="component-use">– ListAdapter with AsyncListDiffer for background diffing, ItemTouchHelper.SimpleCallback(0, LEFT | RIGHT) enables swipe actions, notifyItemChanged animates updates</span></li>
+            <li><span class="component-name">FloatingActionButton</span> <span class="component-use">– app:layout_anchor="@id/coordinator" positions relative to parent, setBehavior hides on scroll, extended FAB shows text + icon</span></li>
+            <li><span class="component-name">SupportMapFragment</span> <span class="component-use">– getMapAsync(OnMapReadyCallback) provides GoogleMap instance, MarkerClusterRenderer groups nearby markers, UiSettings.setZoomControlsEnabled(true)</span></li>
+            <li><span class="component-name">TabLayout</span> <span class="component-use">– TabLayoutMediator.attach() links to ViewPager2, tab.setText() sets titles, addOnTabSelectedListener handles manual tab switches</span></li>
+            <li><span class="component-name">BottomSheetDialogFragment</span> <span class="component-use">– Peeks at 40% height, drag to expand, shows job details with customer info, parts list, and "Start Job" button</span></li>
+        </ul>
+    </div>
+
+    <div class="detail-card">
+        <h3>🎨 Layout Architecture</h3>
+        <ul>
+            <li><span class="component-name">DrawerLayout</span> <span class="component-use">– Root layout with child NavigationView (layout_gravity="start"), openDrawer()/closeDrawer() programmatic control, setScrimColor() darkens content</span></li>
+            <li><span class="component-name">CoordinatorLayout</span> <span class="component-use">– Behavior classes coordinate animations: AppBarLayout.ScrollingViewBehavior links RecyclerView scroll to toolbar collapse, FAB uses app:layout_dodgeInsetEdges</span></li>
+            <li><span class="component-name">ConstraintLayout</span> <span class="component-use">– Inside job detail screens, Guideline at 30% creates left column for labels, Flow helper arranges action buttons horizontally with wrapping</span></li>
+            <li><span class="component-name">CardView</span> <span class="component-use">– RecyclerView item layout, app:cardElevation animated from 2dp to 8dp on press, app:cardUseCompatPadding ensures consistent spacing</span></li>
+        </ul>
+    </div>
+
+    <div class="detail-card">
+        <h3>⚡ Event Handling</h3>
+        <ul>
+            <li><span class="component-name">OnMapReadyCallback</span> <span class="component-use">– onMapReady(GoogleMap) called asynchronously after map loads, executes googleMap.setMapType(MAP_TYPE_NORMAL), adds markers in batch with addAll()</span></li>
+            <li><span class="component-name">GoogleMap.OnMarkerClickListener</span> <span class="component-use">– onMarkerClick(Marker) receives clicked marker, marker.getTag() retrieves associated Job object, returns true to prevent default info window</span></li>
+            <li><span class="component-name">ItemTouchHelper.Callback</span> <span class="component-use">– onSwiped(ViewHolder, direction) checks if LEFT (navigate) or RIGHT (call), creates Intent with ACTION_DIAL/ACTION_VIEW, startActivity()</span></li>
+            <li><span class="component-name">LocationCallback</span> <span class="component-use">– Override onLocationResult(), iterate LocationResult.locations, last element is most recent, post to LiveData for observer notification</span></li>
+            <li><span class="component-name">BroadcastReceiver (Geofence)</span> <span class="component-use">– GeofencingEvent.fromIntent(intent) extracts event, getGeofenceTransition() returns ENTER/EXIT, getGeofencingRequest() identifies job site</span></li>
+            <li><span class="component-name">LiveData<List<Job>> Observer</span> <span class="component-use">– observe(lifecycleOwner) { jobs -> adapter.submitList(jobs) } automatically updates RecyclerView when Room database changes</span></li>
+        </ul>
+    </div>
+</div>
+
+<div class="key-takeaways">
+    <h3>🔑 Key Technical Insights</h3>
+    <ul>
+        <li>Geofencing API reduces battery consumption by 70% compared to constant GPS polling for arrival detection</li>
+        <li>Room's @Transaction annotation ensures customer + job updates succeed or fail atomically, preventing data corruption</li>
+        <li>WorkManager's retry with exponential backoff handles poor connectivity areas without manual intervention</li>
+        <li>Using PRIORITY_BALANCED_POWER_ACCURACY instead of HIGH_ACCURACY extends daily battery life from 6 hours to full shift</li>
+        <li>Clustering map markers (when 10+ jobs in area) improves map performance and reduces visual clutter dramatically</li>
+    </ul>
+</div>
+
+<div class="references">
+    <h4>📚 Real-World Implementations</h4>
+    <a href="https://www.softsuave.com/case-study-field-workforce-management" target="_blank">Field Workforce Management - Mobile App Case Study</a>
+</div>
+</div>
+
+<!-- Case Study 4 -->
+<div class="section" id="case4">
+<div class="section-header">
+    <div class="case-number">04</div>
+    <h2>AI-Powered Photo & Video Editing Application</h2>
+</div>
+
+<img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" alt="AI Media Editor Interface">
+
+<div class="solution-overview">
+    <h3>📋 Case Overview</h3>
+    <p>This AI-powered photo enhancement application (inspired by Remini's viral success) demonstrates sophisticated mobile Camera APIs, hardware-accelerated media processing, and on-device machine learning integration. The app uses Camera2 API for low-level camera control, creating CameraCaptureSession with multiple output surfaces for simultaneous preview and high-resolution capture. TensorFlow Lite Interpreter with GpuDelegate processes images through neural networks for enhancement tasks: super-resolution upscaling, face restoration, old photo colorization, and scratch removal. OpenGL ES shaders handle real-time filter preview by rendering to GLSurfaceView with custom fragment shaders applying color matrices, convolution kernels for sharpening/blur, and tone curve adjustments. MediaStore API manages photo gallery access and saving enhanced images with proper EXIF metadata preservation. UI implements ViewPager2 with TabLayoutMediator for horizontal swiping between Edit/Enhance/Filters tabs. The editing screen uses ConstraintLayout with horizontal RecyclerView for filter thumbnails below main ImageView preview. SeekBar components provide real-time adjustment of enhancement intensity with OnSeekBarChangeListener triggering shader uniform updates. Event handling includes GestureDetector for pinch-to-zoom on ImageView using ScaleGestureDetector.OnScaleGestureListener, double-tap for before/after comparison via OnDoubleTapListener, and TextureView.SurfaceTextureListener managing OpenGL rendering surface lifecycle. Layout architecture employs MotionLayout for animated transitions between camera and editing modes with keyframe-based property animations for smooth UI element repositioning.</p>
+</div>
+
+<div class="tech-implementation">
+    <h3>⚙️ Technical Architecture & Mobile Platform APIs</h3>
+    
+    <div class="tech-item">
+        <div class="tech-item-title">📷 Camera2 API - Advanced Camera Control</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> Camera2 uses pipeline architecture with CameraManager.openCamera() providing CameraDevice handle. CameraCharacteristics queries hardware capabilities (supported resolutions, focus modes, ISO range). Multiple ImageReader surfaces enable concurrent preview + full-resolution capture.
+        <br><br><strong>Implementation:</strong> CameraCaptureSession.setRepeatingRequest() streams preview frames. CaptureRequest.Builder configures per-frame parameters: CONTROL_AE_MODE controls auto-exposure, CONTROL_AF_MODE sets autofocus behavior, LENS_FOCUS_DISTANCE for manual focus. ImageReader.OnImageAvailableListener receives Image objects containing YUV_420_888 pixel data in Image.Plane arrays. Image.getCropRect() and getTimestamp() provide metadata. Converting YUV to RGB: extract Y, U, V planes, apply color space transformation matrix. For enhancement processing, RGB bitmap feeds TensorFlow Lite model Input Tensor, output tensor contains enhanced pixel values reconstructed as Bitmap.</div>
+    </div>
+
+    <div class="tech-item">
+        <div class="tech-item-title">🎥 MediaRecorder & MediaCodec APIs</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> MediaRecorder provides simple video recording API for standard capture scenarios. MediaCodec exposes low-level hardware encoders/decoders, enabling frame-by-frame processing for AI filter application. Essential for applying effects during recording or post-processing.
+        <br><br><strong>Implementation:</strong> MediaRecorder with setVideoEncoder(HEVC) and setVideoSize(3840, 2160) captures 4K at 30fps, using H.265 codec for 50% smaller files than H.264. For AI effects pipeline: MediaExtractor.readSampleData() extracts encoded frames, MediaCodec.createDecoderByType("video/avc") decodes to Surface, AI model processes in GPU via TensorFlow Lite, MediaCodec.createEncoderByType("video/hevc").createInputSurface() receives processed frames, queueInputBuffer() with presentation timestamps maintains sync. Configure with KEY_COLOR_FORMAT = COLOR_FormatSurface for zero-copy GPU-to-encoder transfer. Asynchronous callbacks (onInputBufferAvailable, onOutputBufferAvailable) handle pipeline flow control.</div>
+    </div>
+
+    <div class="tech-item">
+        <div class="tech-item-title">🤖 TensorFlow Lite - On-Device Machine Learning API</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> TensorFlow Lite provides mobile ML inference without cloud dependency. Interpreter loads .tflite model files from assets folder using FileInputStream mapped to MappedByteBuffer. GPU acceleration via GpuDelegate constructor passed to Interpreter.Options.
+        <br><br><strong>Implementation:</strong> Bitmap resized to model's input dimensions (typically 256x256 or 512x512) using Bitmap.createScaledBitmap(). Pixel values extracted into FloatBuffer or ByteBuffer depending on model quantization. Interpreter.run(inputBuffer, outputBuffer) executes inference. For photo enhancement, input is original image, output is enhanced pixel array. INT8 quantized models use ByteBuffer input with values 0-255, Interpreter converts internally. Multi-threaded inference with setNumThreads(4) improves CPU performance. NNAPI delegate accelerates inference on dedicated neural processing units when available. Model execution measures with SystemClock.elapsedRealtime() for performance monitoring.</div>
+    </div>
+
+    <div class="tech-item">
+        <div class="tech-item-title">🎮 OpenGL ES 3.0 - GPU Graphics API</div>
+        <div class="tech-item-desc"><strong>Mobile API Demonstration:</strong> OpenGL ES provides direct GPU access for hardware-accelerated rendering, enabling real-time image effects impossible on CPU. Fragment shaders execute in parallel across GPU cores, processing millions of pixels simultaneously. Essential for 60fps video filter preview.
+        <br><br><strong>Implementation:</strong> GLSurfaceView creates OpenGL context. GLSurfaceView.Renderer implements onSurfaceCreated() (compiles GLSL shaders with glCompileShader(), links program with glLinkProgram()), onSurfaceChanged() (sets viewport), and onDrawFrame() (executes per-frame rendering). Fragment shaders written in GLSL version 300 es apply pixel operations: uniform sampler2D for input texture, texture(sampler, texCoord) samples pixels, vec4 output is processed color. Two-pass Gaussian blur: first pass renders horizontally blurred image to framebuffer object (FBO), second pass reads FBO as texture and blurs vertically. glUniform1f() passes parameters (blur radius, filter intensity) from Java to shader. glTexImage2D() with GL_TEXTURE_EXTERNAL_OES and EXT_YUV_target extension allows direct YUV texture binding from camera without RGB conversion, saving 15ms per frame.</div>
+    </div>
+</div>
+
+<div class="details-grid">
+    <div class="detail-card">
+        <h3>📱 UI Components Used</h3>
+        <ul>
+            <li><span class="component-name">TextureView</span> <span class="component-use">– Camera preview with getSurfaceTexture(), SurfaceTextureListener.onSurfaceTextureAvailable() signals ready for camera, supports Matrix transformations for zoom/pan</span></li>
+            <li><span class="component-name">ImageView</span> <span class="component-use">– setImageBitmap() displays processed images, setScaleType(FIT_CENTER) maintains aspect ratio, Matrix.setScale() for pinch-zoom with GestureDetector</span></li>
+            <li><span class="component-name">RecyclerView</span> <span class="component-use">– Horizontal LinearLayoutManager (HORIZONTAL), SnapHelper centers selected filter, ViewHolder loads filter thumbnails with Glide, onClick applies filter to preview</span></li>
+            <li><span class="component-name">VideoView</span> <span class="component-use">– MediaController for play/pause/seek, setVideoURI() loads from content:// URI, OnPreparedListener detects ready state, OnCompletionListener handles playback end</span></li>
+            <li><span class="component-name">SeekBar</span> <span class="component-use">– setMax(100) for 0-100% intensity, onProgressChanged(seekBar, progress, fromUser) checks fromUser=true, calculates alpha: progress/100f, updates shader uniform</span></li>
+            <li><span class="component-name">Slider (Material)</span> <span class="component-use">– addOnChangeListener { slider, value, fromUser } provides float values, setValueFrom(-2f) to setValueTo(2f) for exposure compensation in EV stops</span></li>
+        </ul>
+    </div>
+
+    <div class="detail-card">
+        <h3>🎨 Layout Architecture</h3>
+        <ul>
+            <li><span class="component-name">ConstraintLayout</span> <span class="component-use">– app:layout_constraintDimensionRatio="16:9" maintains camera preview aspect, Barrier prevents control buttons from overlapping preview, ConstraintSet programmatically animates layout changes</span></li>
+            <li><span class="component-name">ViewPager2</span> <span class="component-use">– android:orientation="horizontal", setOffscreenPageLimit(1) keeps adjacent fragments in memory, TabLayoutMediator synchronizes tabs with pages</span></li>
+            <li><span class="component-name">MotionLayout</span> <span class="component-use">– MotionScene defines <Transition> with constraintSetStart/End, <KeyPosition keyPositionType="pathRelative"> defines motion path, transitionToState(R.id.editing) triggers animation</span></li>
+            <li><span class="component-name">FrameLayout</span> <span class="component-use">– Holds GLSurfaceView for OpenGL rendering overlaid with control buttons using android:layout_gravity to position corners, foreground drawable shows darkened scrim</span></li>
+        </ul>
+    </div>
+
+    <div class="detail-card">
+        <h3>⚡ Event Handling</h3>
+        <ul>
+            <li><span class="component-name">GestureDetector</span> <span class="component-use">– onDoubleTap() toggles before/after comparison, onSingleTapConfirmed() shows/hides UI controls, onFling(velocityX, velocityY) detects swipe direction and speed</span></li>
+            <li><span class="component-name">ScaleGestureDetector</span> <span class="component-use">– onScale(detector) returns detector.scaleFactor, multiply current zoom by scaleFactor, clamp between 1.0f (no zoom) and maxZoom (typically 10.0f), apply to ImageView Matrix</span></li>
+            <li><span class="component-name">View.OnClickListener</span> <span class="component-use">– Capture button onClick checks if camera ready, calls takePicture(), disables button, shows progress indicator, re-enables after onImageSaved callback</span></li>
+            <li><span class="component-name">SurfaceTextureListener</span> <span class="component-use">– onSurfaceTextureAvailable(surface, width, height) receives Surface, use as CameraDevice.createCaptureSession() target, onSurfaceTextureSizeChanged handles rotation</span></li>
+            <li><span class="component-name">SeekBar.OnSeekBarChangeListener</span> <span class="component-use">– onProgressChanged updates filterIntensity variable, if (fromUser) triggers immediate reprocessing, calling applyFilter() which runs TFLite model with new alpha blending ratio</span></li>
+            <li><span class="component-name">GLSurfaceView.Renderer</span> <span class="component-use">– onSurfaceCreated() compiles GLSL shaders, onDrawFrame() called per frame, binds textures, sets uniform variables (filter intensity, LUT texture), draws fullscreen quad</span></li>
+        </ul>
+    </div>
+</div>
+
+<div class="key-takeaways">
+    <h3>🔑 Key Technical Insights</h3>
+    <ul>
+        <li>GPU Delegate accelerates TensorFlow Lite models 8-12x faster than CPU inference, enabling real-time AI effects</li>
+        <li>Using YUV_420_888 format throughout pipeline eliminates expensive color space conversions, saving 40ms per frame</li>
+        <li>OpenGL ES shader compilation happens on first launch; caching compiled shaders reduces subsequent cold starts by 75%</li>
+        <li>MediaCodec's Surface input mode uses zero-copy rendering, processing 4K video with 3GB RAM instead of 8GB</li>
+        <li>Quantized INT8 TensorFlow models maintain 98% accuracy while being 4x smaller and 3x faster than FP32 models</li>
+        <li>Two-pass Gaussian blur in fragment shaders achieves 60fps on 1080p video, impossible with CPU-based approaches</li>
+    </ul>
+</div>
+
+<div class="references">
+    <h4>📚 Real-World Implementations</h4>
+    <a href="https://www.oreateai.com/blog/remini-from-old-photo-fixer-to-viral-sensation-how-ai-is-reshaping-our-memories/dcc42ea04c006213cf2676f24018b332#:~:text=Imagine%20transforming%20your%20everyday%20selfies,a%20diverse%20range%20of%20tools." target="_blank">Remini: How AI Photo Enhancement Became a Viral Sensation</a>
+</div>
+</div>
+
+</div>
+
+<footer>
+    <p style="font-size: 1.1em; font-weight: 500; margin-bottom: 15px;">Mobile Development Case Studies</p>
+    <p style="opacity: 0.85;">A comprehensive exploration of modern mobile application architecture and implementation</p>
+    <p style="opacity: 0.75; font-size: 0.9em; margin-top: 20px;">Individual Assignment | March 2026</p>
+</footer>
+
+</body>
+</html>
